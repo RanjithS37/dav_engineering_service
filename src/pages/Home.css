@@ -95,6 +95,12 @@
 .btn-secondary:hover {
   background: rgba(255, 255, 255, 0.1);
   transform: translateY(-3px);
+  color: #fff; /* keep text white on hover for better contrast */
+}
+
+/* Slightly increase contrast for the Contact Us text when displayed on hero */
+.hero-buttons .btn-secondary {
+  color: #fff;
 }
 
 .btn-large {
@@ -300,6 +306,25 @@
 
   .cta-section p {
     font-size: 1rem;
+  }
+}
+
+/* Improve industries layout on small screens */
+@media screen and (max-width: 480px) {
+  .industries-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    align-items: center;
+    justify-items: center;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .industry-tag {
+    width: 100%;
+    max-width: 260px;
+    text-align: center;
   }
 }
 

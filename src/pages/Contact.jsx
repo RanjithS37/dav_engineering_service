@@ -1,102 +1,20 @@
 import React, { useState } from 'react'
-import emailjs from '@emailjs/browser'
 import './Contact.css'
 
 function Contact() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    subject: '',
-    message: ''
-  })
+  const [messageText, setMessageText] = useState('')
+  const [copied, setCopied] = useState(false)
 
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitStatus, setSubmitStatus] = useState({ type: '', message: '' })
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    })
-    // Clear status message when user starts typing
-    if (submitStatus.message) {
-      setSubmitStatus({ type: '', message: '' })
-    }
-  }
-
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-    setSubmitStatus({ type: '', message: '' })
-
-    // Check if EmailJS is configured
-    const serviceId = 'YOUR_SERVICE_ID'  // Replace with your EmailJS service ID from https://www.emailjs.com/
-    const templateId = 'YOUR_TEMPLATE_ID'  // Replace with your EmailJS template ID
-    const publicKey = 'YOUR_PUBLIC_KEY'  // Replace with your EmailJS public key
-
-    // If EmailJS is not configured, use mailto fallback
-    if (serviceId === 'YOUR_SERVICE_ID' || templateId === 'YOUR_TEMPLATE_ID' || publicKey === 'YOUR_PUBLIC_KEY') {
-      // Fallback to mailto if EmailJS is not configured
-      const mailtoLink = `mailto:davengg123@gmail.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone || 'Not provided'}\n\nMessage:\n${formData.message}`)}`
-      window.location.href = mailtoLink
-      
-      setSubmitStatus({
-        type: 'info',
-        message: 'Opening your email client... If it doesn\'t open, please email us directly at davengg123@gmail.com'
-      })
-      
-      setIsSubmitting(false)
-      return
-    }
-
+  const handleCopy = async () => {
     try {
-      const templateParams = {
-        from_name: formData.name,
-        from_email: formData.email,
-        phone: formData.phone || 'Not provided',
-        subject: formData.subject,
-        message: formData.message,
-        to_email: 'davengg123@gmail.com',
-        reply_to: formData.email, // Allows you to reply directly
-      }
-
-      // Send email using EmailJS
-      await emailjs.send(serviceId, templateId, templateParams, publicKey)
-
-      // Success
-      setSubmitStatus({
-        type: 'success',
-        message: 'Thank you! Your message has been sent successfully. We will get back to you soon.'
-      })
-      
-      // Reset form
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        subject: '',
-        message: ''
-      })
-
-      // Clear success message after 8 seconds
-      setTimeout(() => {
-        setSubmitStatus({ type: '', message: '' })
-      }, 8000)
-
-    } catch (error) {
-      console.error('EmailJS Error:', error)
-      
-      // Fallback to mailto if EmailJS fails
-      const mailtoLink = `mailto:davengg123@gmail.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone || 'Not provided'}\n\nMessage:\n${formData.message}`)}`
-      window.location.href = mailtoLink
-      
-      setSubmitStatus({
-        type: 'info',
-        message: 'Opening your email client as fallback... If it doesn\'t open, please email us directly at davengg123@gmail.com'
-      })
-    } finally {
-      setIsSubmitting(false)
+      await navigator.clipboard.writeText(
+        `To: davengg123@gmail.com\n\n${messageText}`
+      )
+      setCopied(true)
+      setTimeout(() => setCopied(false), 3000)
+    } catch (err) {
+      console.error('Clipboard write failed', err)
+      setCopied(false)
     }
   }
 
@@ -175,96 +93,7 @@ function Contact() {
               </div>
             </div>
 
-            <div className="contact-form-container">
-              <h2>Send us a Message</h2>
-              <form className="contact-form" onSubmit={handleSubmit}>
-                <div className="form-group">
-                  <label htmlFor="name">Full Name *</label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    placeholder="Enter your full name"
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="email">Email Address *</label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    placeholder="Enter your email address"
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="phone">Phone Number</label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    placeholder="Enter your phone number"
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="subject">Subject *</label>
-                  <input
-                    type="text"
-                    id="subject"
-                    name="subject"
-                    value={formData.subject}
-                    onChange={handleChange}
-                    required
-                    placeholder="Enter message subject"
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="message">Message *</label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
-                    rows="6"
-                    placeholder="Enter your message"
-                  ></textarea>
-                </div>
-
-                <button 
-                  type="submit" 
-                  className="btn-submit"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? 'Sending...' : 'Send Message'}
-                </button>
-
-                {submitStatus.message && (
-                  <div className={`submit-status ${submitStatus.type}`}>
-                    {submitStatus.message}
-                  </div>
-                )}
-
-                <div className="form-note">
-                  <p>
-                    <strong>Note:</strong> Currently using email client fallback. To enable direct email sending, 
-                    please configure EmailJS (see EMAIL_SETUP.md). Emails will be sent to: 
-                    <a href="mailto:davengg123@gmail.com">davengg123@gmail.com</a>
-                  </p>
-                </div>
-              </form>
-            </div>
+            {/* Message container removed per request */}
           </div>
         </div>
       </section>
