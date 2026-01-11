@@ -63,6 +63,7 @@
 .nav-link:hover {
   background-color: rgba(255, 255, 255, 0.1);
   transform: translateY(-2px);
+  color: #fff;
 }
 
 .nav-link.active {
@@ -166,6 +167,7 @@
   .nav-link:hover {
     background-color: rgba(255, 255, 255, 0.15);
     transform: none;
+    color: #fff;
   }
 
   .nav-link.active::after {

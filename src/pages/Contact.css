@@ -37,7 +37,7 @@
 
 .contact-grid {
   display: grid;
-  grid-template-columns: 1fr 1.2fr;
+  grid-template-columns: 1fr;
   gap: 50px;
   align-items: start;
 }
@@ -58,13 +58,16 @@
 
 .info-section {
   margin-bottom: 40px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
 }
 
 .info-item {
   display: flex;
   gap: 20px;
-  margin-bottom: 30px;
-  padding: 25px;
+  margin-bottom: 0;
+  padding: 20px;
   background: white;
   border-radius: 10px;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
@@ -80,6 +83,14 @@
   font-size: 2.5rem;
   flex-shrink: 0;
   height: fit-content;
+}
+
+/* Ensure info items align nicely on very large screens */
+@media screen and (min-width: 1200px) {
+  .info-section {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
 }
 
 .info-details h3 {
@@ -190,6 +201,16 @@
 .btn-submit:hover {
   transform: translateY(-3px);
   box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+/* Ensure button text remains readable when background darkens on hover */
+.btn-submit,
+.btn-submit:focus,
+.btn-submit:active {
+  color: #fff;
+}
+.btn-submit:hover {
+  color: #fff;
 }
 
 .btn-submit:active {
@@ -323,7 +344,7 @@
   }
 
   .info-item {
-    padding: 20px;
+    padding: 18px;
   }
 
   .info-icon {

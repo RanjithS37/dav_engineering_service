@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Services.css'
+import View3D from '../assets/images/3d_view.png'
 
 function Services() {
+  const [modalOpen, setModalOpen] = useState(false)
+
   return (
     <div className="services">
       <section className="page-header">
@@ -24,7 +27,24 @@ function Services() {
 
           <div className="service-section">
             <div className="service-card large">
-              <div className="service-icon">🔧</div>
+              <div className="service-icon">
+                <img
+                  src={View3D}
+                  alt="3D piping model overview"
+                  className="service-image"
+                  loading="lazy"
+                  role="button"
+                  tabIndex={0}
+                  aria-haspopup="dialog"
+                  onClick={() => setModalOpen(true)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault()
+                      setModalOpen(true)
+                    }
+                  }}
+                />
+              </div>
               <h2>Piping Design and Detailing</h2>
               <p className="service-description">
                 Piping Design and detailing is offered for the Industries like Process, 
@@ -186,9 +206,19 @@ function Services() {
           </div>
         </div>
       </section>
+
+      {modalOpen && (
+        <div className="modal-overlay" onClick={() => setModalOpen(false)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={() => setModalOpen(false)} aria-label="Close">✕</button>
+            <img src={View3D} alt="3D view large" className="modal-image" />
+          </div>
+        </div>
+      )}
     </div>
   )
 }
 
 export default Services
+
 
