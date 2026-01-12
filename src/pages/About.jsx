@@ -16,7 +16,7 @@ function About() {
           <div className="about-intro">
             <h2>Our Company</h2>
             <p>
-              DAV ENGINEERING SERVICES is a Multi-disciplinary Engineering & Manpower 
+              DAV ENGINEERING SERVICES is a Multi-disciplinary Engineering Services & Manpower 
               Consulting Company established in 2013 based at Chennai, India. In today's 
               challenging business environment, DAV focuses on contemporary and cost-effective 
               services with Core competence and Domain expertise in Engineering Industry.

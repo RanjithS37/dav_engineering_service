@@ -1,6 +1,6 @@
 # DAV Engineering Services - Professional Website
 
-A professional, responsive website for DAV Engineering Services - a Multi-disciplinary Engineering & Manpower Consulting Company based in Chennai, India.
+A professional, responsive website for DAV Engineering Services - a Multi-disciplinary Engineering Services & Manpower Consulting Company based in Chennai, India.
 
 ## Features
 
