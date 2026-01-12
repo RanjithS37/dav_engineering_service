@@ -102,7 +102,7 @@ function Services() {
               <div className="service-icon">🏭</div>
               <h2>Plant Design Solutions (E3D/S3D Services)</h2>
               <p className="service-description">
-                SKB offers comprehensive Plant Design Solutions using PDMS/ SP3D. We offer 
+                DAV offers comprehensive Plant Design Solutions using PDMS/ SP3D. We offer 
                 Services to EPC's for the complete range of 3D Plant Engineering Solutions.
               </p>
               <div className="service-features">

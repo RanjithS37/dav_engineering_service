@@ -8,7 +8,7 @@ function Home() {
       <section className="hero">
         <div className="hero-content">
           <h1>DAV ENGINEERING SERVICES</h1>
-          <p className="hero-subtitle">Multi-disciplinary Engineering & Manpower Consulting Company</p>
+          <p className="hero-subtitle">Multi-disciplinary Engineering Services & Manpower Consulting Company</p>
           <p className="hero-description">
             Established in 2013, based in Chennai, India. Focused on contemporary and 
             cost-effective services with core competence and domain expertise in Engineering Industry.

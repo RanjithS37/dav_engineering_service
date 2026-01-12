@@ -10,7 +10,7 @@ function Footer() {
       <div className="footer-container">
         <div className="footer-section">
           <h3>DAV ENGINEERING SERVICES</h3>
-          <p>Multi-disciplinary Engineering & Manpower Consulting Company</p>
+          <p>Multi-disciplinary Engineering Services & Manpower Consulting Company</p>
           <p>Established in 2013 | Based in Chennai, India</p>
         </div>
         
